@@ -4,11 +4,11 @@ var quizContent = document.querySelector(".questions")
 var start = document.createElement("button");
 
 var secondsLeft = 0;
-var i = 4;
+var i = 0;
 
 
 function setTime() {
-  event.preventDefault();
+  // event.preventDefault();
   var secondsLeft = 75;
   var timerInterval = setInterval(function () {
     timeEl.style.color = "white"
@@ -17,7 +17,7 @@ function setTime() {
 
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
-      alert("You ran out of time. Score is 0.")
+      // alert("You ran out of time. Score is 0.")
     }
 
   }, 1000);
@@ -38,22 +38,56 @@ function homePage() {
 }
 
 function quiz() {
+  var section = document.createElement("div");
+  section.setAttribute('class', `section${i}`)
+  quizContent.appendChild(section);
   starter.style.display = "none";
   var quest = document.createElement("h2");
   quest.textContent = questions[i].title;
-  quizContent.appendChild(quest);
-  for (let j = 0; j < 4; j++) {
-    var op = document.createElement("h4");
+  section.appendChild(quest);
+  for (let j = 0; j < questions[i].choices.length; j++) {
+    var row = document.createElement("div");
+    row.setAttribute('class', 'row')
+    var op = document.createElement("button");
     op.textContent = questions[i].choices[j];
-    quizContent.appendChild(op);
+    row.appendChild(op);
+    section.appendChild(row);
   }
 }
+
+
+quizContent.addEventListener("click", function(event) {
+  var element = event.target;
+  console.log(element)
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    console.log(event.target.textContent)
+    var choice = event.target.textContent;
+    if(choice === questions[i].answer) {
+      console.log("Correct")
+      i++
+      quiz()
+
+    }
+    else {
+      console.log("incorrect")
+    }
+
+
+
+
+  }
+});
+
+
+homePage();
+
+
 
 start.addEventListener("click", function (event) {
   event.preventDefault();
   setTime();
   quiz();
 });
-
-
-homePage();
