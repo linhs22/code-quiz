@@ -44,6 +44,7 @@ function homePage() {
 }
 
 function scoreGame() {
+  clearInterval(timerInterval);
   var done = document.createElement("h1");
   done.textContent = "All done.";
   var scoreText = document.createElement("p");
