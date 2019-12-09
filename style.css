@@ -2,3 +2,12 @@
     text-align: right;
 }
 
+.container {
+    margin: 10% 5% 5% 5%;
+    text-align: center;
+    border: 1px solid lightgrey;
+    background-color: honeydew;
+    border: 1px solid lightgray;
+}
+
+
