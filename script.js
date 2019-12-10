@@ -1,7 +1,6 @@
 var timeEl = document.querySelector(".nav-item");
 var starter = document.querySelector(".starter");
 var quizContent = document.querySelector(".questions")
-var start = document.createElement("button");
 var lastq = document.querySelector(".section4");
 var score = document.querySelector(".score");
 var timerInterval
@@ -15,6 +14,7 @@ var high = document.querySelector(".highscore");
 var nav = document.querySelector(".navbar")
 var returnToQuiz = document.createElement("button");
 var hs = document.querySelector("#titlehead")
+// var start = document.createElement("button")
 
 
 var secondsLeft = 0;
@@ -51,9 +51,16 @@ function homePage() {
   var description = document.createElement("h6");
   description.textContent = "Try to answer the code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds!"
   starter.appendChild(description);
+  var start = document.createElement("button")
+  start.setAttribute("class","startBtn")
   start.textContent = "Start Quiz";
   starter.appendChild(start);
   starter.style.textAlign = ("center");
+  start.addEventListener("click", function (event) {
+    event.preventDefault();
+    setTime();
+    quiz();
+  });
 }
 
 function scoreGame() {
@@ -71,9 +78,11 @@ function scoreGame() {
   score.appendChild(submit);
 }
 function quiz() {
+
   if (i === 5) {
     return scoreGame()
   }
+  quizContent.style.display = "block";
   starter.style.display = "none";
   var section = document.createElement("div");
   section.setAttribute('class', `section${i}`)
@@ -176,11 +185,6 @@ submit.addEventListener("click", function (event) {
 
 
 
-start.addEventListener("click", function (event) {
-  event.preventDefault();
-  setTime();
-  quiz();
-});
 
 returnToQuiz.addEventListener("click", function (event) {
   event.preventDefault();
@@ -196,10 +200,13 @@ returnToQuiz.addEventListener("click", function (event) {
 });
 
 hs.addEventListener("click", function (event) {
+  event.preventDefault()
+  clearInterval(timerInterval)
   event.preventDefault();
   appendWinners();
   starter.style.display = "none";
   nav.style.display = "none";
+  quizContent.style.display = "none";
 });
 
 
