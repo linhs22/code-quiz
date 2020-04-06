@@ -1,4 +1,4 @@
-# henryhw4
+# Code Quiz
 Coding Quiz
 
 ## Description
